@@ -97,6 +97,7 @@ end
 function swap!(x::Vector, i::Integer, j::Integer) :: Nothing
     # Die funktion tauscht die Werte 2er Stellen eines Vektors x 
     # dabei wird x veraendert!!!
+    # x ... Vektor
     # i ... 1. Stelle
     # j ... 2. Stelle
 
@@ -111,6 +112,7 @@ function bubblesort!(x::Vector{<:Real}; rev::Bool = false) :: Nothing
 
     # Die Funktion sortiert den Vektor x nach groesse
     # dabei wird x veraendert!!!
+    # x ... Vektor
     # rev = false ... es wird aufsteigend sortiert, defaultwert
     # rev = true ... es wird absteigend sortiert
 
@@ -147,6 +149,9 @@ end
 ### Beispiel 4
 
 function canonicaltour(x::Vector{T}) :: Vector{T} where {T <: Integer}
+
+    # Die Funktion berechnet die kanonische tour einer Reise x
+    # x ... Vektor, Permuation von 1:length(x)
 
     # Laenge von x speichern
     len = length(x)
@@ -200,7 +205,7 @@ end
 
 function distance(x::Vector{<:Real}, y::Vector{<:Real}; p::Real = 2)
 
-    # Die funktion berechnet die p-Distanz zwischen zwei Vektoren x und y
+    # Die Funktion berechnet die p-Distanz zwischen zwei Vektoren x und y
     # x, y gleich lang
     # p ist > 0, defaultwert = 2
 
