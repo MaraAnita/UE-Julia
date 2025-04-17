@@ -172,29 +172,82 @@ function canonicaltour(x::Vector{T}) :: Vector{T} where {T <: Integer}
     # Die 1-er Stadt finden
     eins = findmin(x)[2]
     
-    # Abschnitt bis zur 1-er Stadt
-    anfang = x[1:eins - 1]
-    # Abschnitt ab der 1-er Stadt
-    ende = x[eins + 1:len]
-    
     # die erste Stelle der Reise ist immer 1-er Stadt
     reise = [1]
 
-    # Die 2-te Stadt soll kleiner sein als die n-te
-    # Daher: Falls die vor 1 kleiner als die nach 1:
-    if anfang[end] < ende[1]
-    
-        reverse!(anfang)            # Anfang umdrehen
-        reverse!(ende)              # Ende umdrehen
-        append!(anfang, ende)       # Ende an Anfang anhaengen
-        append!(reise, anfang)      # Die Reise um den rest der Reise verlaengern
 
-    else
-        # Fall s die vor 1 groesser als die nach 1:
-        append!(ende, anfang)   # anfang an ende anhaengen
-        append!(reise, ende)    # reise um den rest der reise verlaengern
+
+    # If fuer verschiedene orte von Stadt 1
+    if eins == 1               # 1 ist am Anfang
+        anfang = []                 # Abschnitt bis zur 1-er Stadt
+        ende = x[2:len]             # Abschnitt ab der 1-er Stadt
+
+        # Die 2-te Stadt soll kleiner sein als die n-te
+        # Daher: Falls die vor 1 kleiner als die nach 1:
+        if ende[end] < ende[1]
+        
+            reverse!(anfang)            # Anfang umdrehen
+            reverse!(ende)              # Ende umdrehen
+            append!(anfang, ende)       # Ende an Anfang anhaengen
+            append!(reise, anfang)      # Die Reise um den rest der Reise verlaengern
+
+        else
+            # Fall s die vor 1 groesser als die nach 1:
+            append!(ende, anfang)   # anfang an ende anhaengen
+            append!(reise, ende)    # reise um den rest der reise verlaengern
+        
+        end
+
+
+
+    elseif eins == len         # 1 ist am Ende
+        anfang = x[1:len-1]         # Abschnitt bis zur 1-er Stadt
+        ende = []                   # Abschnitt ab der 1-er Stadt
+
+        # Die 2-te Stadt soll kleiner sein als die n-te
+        # Daher: Falls die vor 1 kleiner als die nach 1:
+        if anfang[end] < anfang[1]
+        
+            reverse!(anfang)            # Anfang umdrehen
+            reverse!(ende)              # Ende umdrehen
+            append!(anfang, ende)       # Ende an Anfang anhaengen
+            append!(reise, anfang)      # Die Reise um den rest der Reise verlaengern
+
+        else
+            # Fall s die vor 1 groesser als die nach 1:
+            append!(ende, anfang)   # anfang an ende anhaengen
+            append!(reise, ende)    # reise um den rest der reise verlaengern
+        
+        end
+
+
+
+    else                        # 1 ist in der Mitte
+        anfang = x[1:eins - 1]      # Abschnitt bis zur 1-er Stadt
+        ende = x[eins + 1:len]      # Abschnitt ab der 1-er Stadt
+    
+        # Die 2-te Stadt soll kleiner sein als die n-te
+        # Daher: Falls die vor 1 kleiner als die nach 1:
+        if anfang[end] < ende[1]
+        
+            reverse!(anfang)            # Anfang umdrehen
+            reverse!(ende)              # Ende umdrehen
+            append!(anfang, ende)       # Ende an Anfang anhaengen
+            append!(reise, anfang)      # Die Reise um den rest der Reise verlaengern
+
+        else
+            # Fall s die vor 1 groesser als die nach 1:
+            append!(ende, anfang)   # anfang an ende anhaengen
+            append!(reise, ende)    # reise um den rest der reise verlaengern
+        
+        end
+    
+    
+    
+    
     
     end
+    
 
     # fertige reise ausgeben
     return reise
