@@ -5,6 +5,8 @@ Wichtig 1: Die Datei gemaess der Namensrichtlinien benennen.
 Wichtig 2: Bitte nur die Funktionen ausprogrammieren und keine Funktionsaufrufe vornehmen.
 =#
 
+# Pakete laden
+using StatsBase
 
 ### Beispiel 1:
 
@@ -242,13 +244,8 @@ function canonicaltour(x::Vector{T}) :: Vector{T} where {T <: Integer}
         
         end
     
-    
-    
-    
-    
     end
     
-
     # fertige reise ausgeben
     return reise
 end
